@@ -32,7 +32,9 @@
       <pre id="output"></pre>
     </main>
     <script>
+      let output;
       document.addEventListener('DOMContentLoaded', () => {
+        output = document.getElementById('output');
         document.getElementById('btnLive').addEventListener('click', live);
         document.getElementById('btnToken').addEventListener('click', gettoken);
         document.getElementById('btnTest').addEventListener('click', test);
@@ -41,15 +43,50 @@
 
       function live(ev) {
         //check that the server is live
+        fetch(baseurl)
+          .then((res) => res.json())
+          .then((content) => {
+            output.innerHTML = JSON.stringify(content, '\n', 2);
+          })
+          .catch((err) => console.error);
       }
 
       function gettoken(ev) {
         //request a token
+        fetch(baseurl + 'token')
+          .then((res) => res.json())
+          .then((content) => {
+            output.innerHTML = JSON.stringify(content, '\n', 2);
+            let token = content.data;
+            localStorage.setItem('token', token);
+          })
+          .catch((err) => console.error);
       }
 
       function test(ev) {
         //send the token and for some secret purpose
         let token = localStorage.getItem('token');
+        if (!token) {
+          output.innerHTML = 'No available token';
+          return;
+        }
+        let h = new Headers();
+        h.append('Authorization', `Bearer ${token}`);
+        let url = baseurl + 'test';
+        let req = new Request(url, {
+          headers: h,
+          method: 'GET',
+        });
+        fetch(req)
+          .then((res) => res.json())
+          .then((content) => {
+            output.innerHTML = JSON.stringify(content, '\n', 2);
+            if (content.code > 0) {
+              //error happened
+              localStorage.removeItem('token');
+            }
+          })
+          .catch((err) => console.error);
       }
     </script>
   </body>
