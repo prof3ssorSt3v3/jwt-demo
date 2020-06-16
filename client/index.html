@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Web Tokens</title>
+    <style>
+      html {
+        font-size: 24px;
+        font-weight: 300;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      header,
+      main {
+        padding: 1rem 2rem;
+      }
+      p,
+      button {
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Using JWT</h1>
+    </header>
+    <main>
+      <p><button id="btnLive">Click to Test Server</button></p>
+      <p><button id="btnToken">Click to Get Token</button></p>
+      <p><button id="btnTest">Click to Check Token</button></p>
+      <pre id="output"></pre>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('btnLive').addEventListener('click', live);
+        document.getElementById('btnToken').addEventListener('click', gettoken);
+        document.getElementById('btnTest').addEventListener('click', test);
+      });
+      const baseurl = 'http://127.0.0.1:3030/';
+
+      function live(ev) {
+        //check that the server is live
+      }
+
+      function gettoken(ev) {
+        //request a token
+      }
+
+      function test(ev) {
+        //send the token and for some secret purpose
+        let token = localStorage.getItem('token');
+      }
+    </script>
+  </body>
+</html>
