@@ -48,7 +48,7 @@
           .then((content) => {
             output.innerHTML = JSON.stringify(content, '\n', 2);
           })
-          .catch((err) => console.error);
+          .catch(console.error);
       }
 
       function gettoken(ev) {
@@ -60,7 +60,7 @@
             let token = content.data;
             localStorage.setItem('token', token);
           })
-          .catch((err) => console.error);
+          .catch(console.error);
       }
 
       function test(ev) {
@@ -86,7 +86,7 @@
               localStorage.removeItem('token');
             }
           })
-          .catch((err) => console.error);
+          .catch(console.error);
       }
     </script>
   </body>
